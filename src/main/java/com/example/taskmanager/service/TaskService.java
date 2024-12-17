@@ -14,24 +14,8 @@ public class TaskService {
     }
 
     public List<Task> listTasks() {
-        return tasks.stream()
-                .sorted((task1, task2) -> {
-                    int priority1 = getPriorityValue(task1.getPriority());
-                    int priority2 = getPriorityValue(task2.getPriority());
-                    return Integer.compare(priority1, priority2);
-                })
-                .collect(Collectors.toList());
+        return new ArrayList<>(tasks);
     }
-
-    private int getPriorityValue(String priority) {
-        switch (priority.toLowerCase()) {
-            case "high": return 1;
-            case "medium": return 2;
-            case "low": return 3;
-            default: return 4;
-        }
-    }
-
 
     public List<Task> listCompletedTasks() {
         return tasks.stream().filter(Task::isCompleted).collect(Collectors.toList());
