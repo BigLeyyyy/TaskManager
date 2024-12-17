@@ -17,11 +17,15 @@ tasks.test {
     useJUnitPlatform()
 }
 
-jacocoTestReport {
+jacoco {
+    toolVersion = "0.8.11"
+}
+
+tasks.jacocoTestReport {
     dependsOn test
     reports {
-        xml.required = true
-        html.required = true
+        xml.required.set(true)
+        html.required.set(true)
     }
 }
 
@@ -29,6 +33,7 @@ sonarqube {
     properties {
         property "sonar.projectKey", "TasksManagers" 
         property "sonar.host.url", "http://localhost:9000" 
+        property "sonar.java.coveragePlugin", "jacoco"
         property "sonar.login", "sqp_a59dd3c29c2da322ddc94591d4751ecf674b8302"
     }
 }
